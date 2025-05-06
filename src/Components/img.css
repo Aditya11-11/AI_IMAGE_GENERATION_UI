@@ -1,0 +1,12 @@
+/* Hover Zoom Effect */
+.hover-zoom {
+  overflow: hidden; /* Ensure the zoomed image doesn't overflow */
+}
+
+.img-zoom {
+  transition: transform 0.3s ease; /* Smooth transition for zoom effect */
+}
+
+.hover-zoom:hover .img-zoom {
+  transform: scale(1.1); /* Zoom in by 10% */
+}
