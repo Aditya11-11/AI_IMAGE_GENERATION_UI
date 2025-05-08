@@ -128,39 +128,7 @@ const MenCreate = () => {
         ))}
       </div>
 
-      {/* Breast Size Selection */}
-      {/* <h4 className="mt-4">Choose Breast Size</h4>
-      <div className="row justify-content-center">
-        {breastSizes.map((size) => (
-          <div className="col-6 col-md-2" key={size.name}>
-            <img
-              src={size.img}
-              alt={size.name}
-              className={`img-fluid border rounded p-2 ${selectedBreastSize === size.name ? "border-primary" : ""}`}
-              onClick={() => setSelectedBreastSize(size.name)}
-              style={{ cursor: "pointer", width: "100px", height: "100px" }}
-            />
-            <p>{size.name}</p>
-          </div>
-        ))}
-      </div> */}
 
-      {/* Butt Size Selection */}
-      {/* <h4 className="mt-4">Choose Butt Size</h4>
-      <div className="row justify-content-center">
-        {buttSizes.map((size) => (
-          <div className="col-6 col-md-2" key={size.name}>
-            <img
-              src={size.img}
-              alt={size.name}
-              className={`img-fluid border rounded p-2 ${selectedButtSize === size.name ? "border-primary" : ""}`}
-              onClick={() => setSelectedButtSize(size.name)}
-              style={{ cursor: "pointer", width: "100px", height: "100px" }}
-            />
-            <p>{size.name}</p>
-          </div>
-        ))}
-      </div> */}
 
       {/* Skin Color Selection */}
       <h4 className="mt-4">Choose Skin Color</h4>
