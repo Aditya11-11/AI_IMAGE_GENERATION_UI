@@ -1,6 +1,3 @@
-
-
-
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,7 +11,13 @@ const SignupPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
-  console.log(name,email,password, confirm_password,"------------------------------");
+  console.log(
+    name,
+    email,
+    password,
+    confirm_password,
+    "------------------------------"
+  );
 
   const handleSignup = async (event) => {
     event.preventDefault();
@@ -59,14 +62,14 @@ const SignupPage = () => {
       if (err.response) {
         setError(`Error: ${err.response.data?.message || err.response.status}`);
       } else if (err.request) {
-        setError("No response from server. Please check your internet connection.");
+        setError(
+          "No response from server. Please check your internet connection."
+        );
       } else {
         setError("An unknown error occurred.");
       }
     }
   };
-
-
 
   return (
     <div className="container-fluid" style={{ height: "100%" }}>
@@ -81,15 +84,25 @@ const SignupPage = () => {
               boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
             }}
           >
-            <h2 className="mb-3 fw-bold" style={{ color: "#764ba2" }}>Create an Account</h2>
-            <p className="text-muted fw-bold">Join us to create and monetize your own AI influencers</p>
+            <h2 className="mb-3 fw-bold" style={{ color: "#764ba2" }}>
+              Create an Account
+            </h2>
+            <p className="text-muted fw-bold">
+              Join us to create and monetize your own AI influencers
+            </p>
 
-            {error && <div className="alert alert-danger text-center">{error}</div>}
-            {success && <div className="alert alert-success text-center">{success}</div>}
+            {error && (
+              <div className="alert alert-danger text-center">{error}</div>
+            )}
+            {success && (
+              <div className="alert alert-success text-center">{success}</div>
+            )}
 
             <form onSubmit={handleSignup}>
               <div className="mb-3">
-                <label className="form-label fw-bold" style={{ color: "#555" }}>Name</label>
+                <label className="form-label fw-bold" style={{ color: "#555" }}>
+                  Name
+                </label>
                 <input
                   type="text"
                   className="form-control"
@@ -102,7 +115,9 @@ const SignupPage = () => {
               </div>
 
               <div className="mb-3">
-                <label className="form-label fw-bold" style={{ color: "#555" }}>Email</label>
+                <label className="form-label fw-bold" style={{ color: "#555" }}>
+                  Email
+                </label>
                 <input
                   type="email"
                   className="form-control"
@@ -115,7 +130,9 @@ const SignupPage = () => {
               </div>
 
               <div className="mb-3">
-                <label className="form-label fw-bold" style={{ color: "#555" }}>Password</label>
+                <label className="form-label fw-bold" style={{ color: "#555" }}>
+                  Password
+                </label>
                 <input
                   type="password"
                   className="form-control"
@@ -128,7 +145,9 @@ const SignupPage = () => {
               </div>
 
               <div className="mb-3">
-                <label className="form-label fw-bold" style={{ color: "#555" }}>Confirm Password</label>
+                <label className="form-label fw-bold" style={{ color: "#555" }}>
+                  Confirm Password
+                </label>
                 <input
                   type="password"
                   className="form-control"
@@ -140,28 +159,40 @@ const SignupPage = () => {
                 />
               </div>
 
-              <button type="submit" className="btn w-100" style={{ background: "#764ba2", color: "#fff", border: "none" }}>
+              <button
+                type="submit"
+                className="btn w-100"
+                style={{ background: "#764ba2", color: "#fff", border: "none" }}
+              >
                 Sign Up
               </button>
             </form>
 
             <div className="text-center mt-3">
               <span style={{ color: "#555" }}>
-                Already have an account? <Link to="/login" style={{ color: "#764ba2" }}>Login</Link>
+                Already have an account?{" "}
+                <Link to="/login" style={{ color: "#764ba2" }}>
+                  Login
+                </Link>
               </span>
             </div>
           </div>
         </div>
 
-        <div className="col-lg-6 d-none d-lg-flex align-items-center justify-content-center" style={{ background: "rgba(118, 75, 162, 0.8)", color: "#fff" }}>
+        <div
+          className="col-lg-6 d-none d-lg-flex align-items-center justify-content-center"
+          style={{ background: "rgba(118, 75, 162, 0.8)", color: "#fff" }}
+        >
           <div className="text-center p-4">
-            <h2 className="fw-bold">Design your own influencer, or chat with one</h2>
+            <h2 className="fw-bold">
+              Design your own influencer, or chat with one
+            </h2>
             <p className="lead">Create, chat, and more</p>
             <img
-                src="https://i.ibb.co/cXVj2jK6/DALL-E-2025-03-03-11-31-36-A-futuristic-digital-interface-of-a-login-screen-designed-for-an-AI-influ.webp"
-                className="img-fluid"
-                alt="AI Influencer Preview"
-              />
+              src="https://i.ibb.co/cXVj2jK6/DALL-E-2025-03-03-11-31-36-A-futuristic-digital-interface-of-a-login-screen-designed-for-an-AI-influ.webp"
+              className="img-fluid"
+              alt="AI Influencer Preview"
+            />
           </div>
         </div>
       </div>
