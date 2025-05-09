@@ -16,40 +16,39 @@ const LoginPage = () => {
 
 
 
-const handleLogin = async (e) => {
-  e.preventDefault();  // Prevent form submission
-  setError("");        // Reset previous error
-  setLoading(true);    // Show loading state
-
-  try {
-    // Make the login API call
-    const response = await axios.post(
-      "https://image-generation-production.up.railway.app/Login", // API Endpoint
-      { email, password }
-    );
-
-    console.log("API Response:", response.data);
-
-    // If login is successful and a token is returned
-    if (response.data.access_token) {
-      // Store Token in Local Storage
-      localStorage.setItem("token", response.data.access_token);
-      
-      console.log("Token Stored in LocalStorage:", localStorage.getItem("token"));
-
-      // Redirect to the desired page (dashboard in this case)
-      navigate("/earlyaccess");
-    } else {
-      // If login fails, display the error message
-      setError(response.data?.message || "Invalid credentials!");
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+  
+    try {
+      const response = await axios.post(
+        "https://image-generation-production.up.railway.app/Login",
+        { email, password }
+      );
+  
+      console.log("API Response:", response.data);
+  
+      if (response.data?.access_token) {
+        // Store user_id and token in localStorage
+        localStorage.setItem("token", response.data.access_token); // Save token
+        localStorage.setItem("user_id", response.data.user_id); // Save user_id
+        localStorage.setItem("user_name", response.data.user_name); // Save user_name if required
+  
+        console.log("Token Stored:", localStorage.getItem("token"));
+        console.log("User ID Stored:", localStorage.getItem("user_id"));
+  
+        // Redirect to the next page after successful login
+        navigate("/earlyaccess");
+      } else {
+        setError("Invalid credentials.");
+      }
+    } catch (err) {
+      console.error("API Error:", err);
+      setError("Login failed!");
     }
-  } catch (err) {
-    console.error("API Error:", err);
-    setError("Login failed! Please try again.");  // Default error message
-  }
-
-  setLoading(false);  // Stop loading state after the request is finished
-};
+    setLoading(false);
+  };
 
 
   

@@ -36,6 +36,15 @@ const FemaleDetails = () => {
     if (formData.image) {
       formDataToSend.append("image", formData.image);  // If an image file is selected
     }
+
+      
+    const token = localStorage.getItem("token");  // Retrieve the token from localStorage
+    console.log("Token:", token); // Log the token to check if it's available
+    if (!token) {
+      console.error("Token is missing. Please log in.");
+      alert("Please log in to continue.");
+      return;  // Exit early if token is missing
+    }
   
     try {
       const response = await axios.post(
@@ -44,6 +53,7 @@ const FemaleDetails = () => {
         {
           headers: {
             "Content-Type": "multipart/form-data", // Ensure Content-Type is multipart
+            Authorization: `Bearer ${token}`,
           },
         }
       );

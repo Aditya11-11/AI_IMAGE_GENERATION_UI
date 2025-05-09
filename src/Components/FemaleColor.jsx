@@ -4,9 +4,9 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const FemaleEyeHair = () => {
-  const [selectedEyeColor, setSelectedEyeColor] = useState("#3D1F14");
-  const [selectedHairColor, setSelectedHairColor] = useState("#FFFFFF");
-  const [selectedHairStyle, setSelectedHairStyle] = useState("Undercut");
+  const [selectedEyeColor, setSelectedEyeColor] = useState("#3D1F14"); // Default eye color
+  const [selectedHairColor, setSelectedHairColor] = useState("#FFFFFF"); // Default hair color
+  const [selectedHairStyle, setSelectedHairStyle] = useState("Undercut"); // Default hair style
 
   const eyeColors = ["#3D1F14", "#A66A2C", "#4B7090", "#5A98C9", "#4473B3", "#D7DFE5", "#A4C639"];
   const hairColors = [
@@ -29,20 +29,55 @@ const FemaleEyeHair = () => {
     { name: "Braid", img: "/img/h9" },
   ];
 
+  // Save selections to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem("eye_color", selectedEyeColor);
     localStorage.setItem("hair_color", selectedHairColor);
     localStorage.setItem("hair_style", selectedHairStyle);
   }, [selectedEyeColor, selectedHairColor, selectedHairStyle]);
 
+
+  // const handleGenerateImage = async () => {
+  //   // Constructing the prompt and data
+  //   const characterData = {
+  //     type: localStorage.getItem("gender"),
+  //     bodyShape: localStorage.getItem("body_shape"),
+  //     breastSize: localStorage.getItem("breast_size"),
+  //     buttSize: localStorage.getItem("butt_size"),
+  //     skinColor: localStorage.getItem("skin_color"),
+  //     eyeColor: localStorage.getItem("eye_color"),
+  //     hairColor: localStorage.getItem("hair_color"),
+  //     hairStyle: localStorage.getItem("hair_style"),
+  //   };
+  
+  //   // const prompt = `Generate an image of a ${characterData.gender} character with ${characterData.body_shape} body shape, ${characterData.breast_size} breast size, ${characterData.butt_size} butt size, ${characterData.skin_color} skin color, ${characterData.eye_color} eyes, ${characterData.hair_color} hair, and ${characterData.hair_style} hairstyle.`;
+  
+  //   // Log the data to check it
+  //   console.log("Generated Data:", { characterData });
+  
+  //   const generateData = { characterData };
+  
+  //   try {
+  //     const response = await axios.post("https://image-generation-production.up.railway.app/text-to-image", generateData, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  
+  //     console.log("Generated Image:", response.data);
+  //   } catch (error) {
+  //     console.error("Error generating image:", error.response ? error.response.data : error.message);
+  //   }
+  // };
   const handleGenerateImage = async () => {
     const userId = localStorage.getItem("user_id"); // Retrieve user_id from localStorage
-
+  
     if (!userId) {
       console.error("User ID is missing. Please log in.");
+      alert("Please log in to continue.");
       return;  // Exit early if user_id is not available
     }
-
+  
     const generateData = {
       user_id: userId,  // Include the user_id in the data
       gender: localStorage.getItem("gender"),
@@ -56,16 +91,17 @@ const FemaleEyeHair = () => {
       hair_style: localStorage.getItem("hair_style"),
       nationality: localStorage.getItem("nationality"),
     };
-
-    console.log("Generated Data:", generateData);  // Verify the data being sent
-
+  
+    console.log("Generated Data:", generateData);
+  
     const token = localStorage.getItem("token");  // Retrieve the token from localStorage
-
+    console.log("Token:", token); // Log the token to check if it's available
     if (!token) {
       console.error("Token is missing. Please log in.");
+      alert("Please log in to continue.");
       return;  // Exit early if token is missing
     }
-
+  
     try {
       const response = await axios.post(
         "https://image-generation-production.up.railway.app/text-to-image",
@@ -77,12 +113,14 @@ const FemaleEyeHair = () => {
           },
         }
       );
-
+  
       console.log("Generated Image:", response.data);
     } catch (error) {
       console.error("Error generating image:", error.response ? error.response.data : error.message);
     }
   };
+  
+  
 
   return (
     <div className="container text-center mt-5 text-white" style={{ paddingBottom: "20px" }}>

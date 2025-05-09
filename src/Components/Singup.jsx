@@ -46,13 +46,13 @@ const SignupPage = () => {
 
       console.log("✅ Signup Response:", response.data);
 
-      if (response.data.status === "true") {
+      if (response.data.message === "User Registered Succesfully") {
         setSuccess("Signup successful! Redirecting to login...");
 
         // Redirect to login page after a successful signup
         setTimeout(() => {
           navigate("/login"); // Redirect to login page
-        }, 2000);
+        },);
       } else {
         setError(response.data?.message || "Signup failed.");
       }
