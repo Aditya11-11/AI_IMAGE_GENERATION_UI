@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 
 const MenCreate = () => {
-  const [selectedType, setSelectedType] = useState("Male");
+  const [selectedType, setSelectedType] = useState("boy");
   const [age, setAge] = useState("");
   const [selectedShape, setSelectedShape] = useState("");
   const [selectedBreastSize, setSelectedBreastSize] = useState("");
@@ -85,13 +85,13 @@ const MenCreate = () => {
              <img
                src="/img/outputboy.jpg"
                alt="Male"
-               className={`img-fluid border rounded p-2 ${selectedType === "Male" ? "border-primary" : ""}`}
+               className={`img-fluid border rounded p-2 ${selectedType === "boy" ? "border-primary" : ""}`}
                style={{ width: "250px", height: "250px" }}
              />
              <br />
              <Link to="/MaleCreate"
                className="btn btn-primary mt-2"
-               onClick={() => handleSelectType("Male")}
+               onClick={() => handleSelectType("boy")}
              >
                Select Male
              </Link>

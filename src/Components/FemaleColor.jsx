@@ -115,6 +115,7 @@ const FemaleEyeHair = () => {
       );
   
       console.log("Generated Image:", response.data);
+      localStorage.setItem("generatedImageUrl", response.data.image_url); // Save the generated image URL in localStorage
     } catch (error) {
       console.error("Error generating image:", error.response ? error.response.data : error.message);
     }

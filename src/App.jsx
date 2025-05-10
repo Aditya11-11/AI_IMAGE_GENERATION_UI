@@ -39,6 +39,10 @@ import About from "./Components/Blog.jsx";
 import Home from "./Components/GetAccess.jsx"; // Added clearly missing Home component
 import CreateImageFinal from './Components/CreateImageFinal.jsx';
 
+import AdminDashboard from './Components/AdminDashboard.jsx';
+
+import Chat from './Components/Chat.jsx';
+
 function AppContent() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
@@ -57,6 +61,8 @@ function AppContent() {
             <Routes>
               <Route path="/" element={<EarlyAccess />} />
               <Route path="/earlyaccess" element={<EarlyAccess />} />
+              <Route path='/dashboard' element={<AdminDashboard/>}/>
+              
               <Route path="/getaccess" element={<GetAccess />} />
               <Route path="/Gallery" element={<Gallery />} />
               <Route path="/createimg" element={<Createimg />} />
@@ -80,6 +86,7 @@ function AppContent() {
               <Route path="/about" element={<About />} />
               <Route path="/home" element={<Home />} />
               <Route path="/createimage" element={<CreateImageFinal />}/>
+              <Route path='/chat' element={<Chat/>}/>
             </Routes>
           </Suspense>
         </div>

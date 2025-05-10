@@ -1,8 +1,8 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link, Navigate } from "react-router-dom";
 
 const profiles = [
-  
   {
     name: "Hatsune Ao",
     age: 25,
@@ -586,14 +586,10 @@ const Explore = () => {
         <div className="carousel-inner">
           <div className="carousel-item active">
             <div className="row">
-              {[1, 2, 3, 4,].map((index) => (
+              {[1, 2, 3, 4].map((index) => (
                 <div key={index} className="col-12 col-md-6 col-lg-3">
                   <div className="card ">
-                    <img
-                      src="img/output1.jpg"
-                      className="card-img-top"
-                    
-                    />
+                    <img src="img/output1.jpg" className="card-img-top" />
                     <div className="card-body">
                       <h5 className="card-title">Card title {index}</h5>
                       <span className="text-sm bg-light me-3">18</span>
@@ -606,7 +602,9 @@ const Explore = () => {
                       </p>
                       <div>
                         <button className="btn btn-light me-4">Follow</button>
-                        <button className="btn btn-dark">Chat</button>
+                       <Link to="/chat">
+                          <button className="btn btn-dark">Chat</button>
+                          </Link>
                       </div>
                     </div>
                   </div>
@@ -619,11 +617,7 @@ const Explore = () => {
               {[5, 6, 7, 8].map((index) => (
                 <div key={index} className="col-12 col-md-6 col-lg-3">
                   <div className="card h-100">
-                    <img
-                      src=""
-                      className="card-img-top"
-                     
-                    />
+                    <img src="" className="card-img-top" />
                     <div className="card-body">
                       <h5 className="card-title">Card title {index}</h5>
                       <span className="text-sm bg-light me-3">18</span>
@@ -645,43 +639,33 @@ const Explore = () => {
             </div>
           </div>
         </div>
-        <a
-          className="carousel-control-prev"
-          href="#influencerCarousel"
-          role="button"
-          data-slide="prev"
-        >
+    
           <span
             className="carousel-control-prev-icon"
             aria-hidden="true"
           ></span>
           <span className="sr-only">Previous</span>
-        </a>
-        <a
-          className="carousel-control-next"
-          href="#influencerCarousel"
-          role="button"
-          data-slide="next"
-        >
+      
+      
           <span
             className="carousel-control-next-icon"
             aria-hidden="true"
           ></span>
           <span className="sr-only">Next</span>
-        </a>
+      
       </div>
-<div>
-      <h2 className="my-4">All Influencers</h2>
-      {/* Profile Cards Section */}
-      <div className="container-flud py-4 bg-black p-2">
-        <div className="row">
-          {profiles.map((profile, index) => (
-            <ProfileCard key={index} profile={profile} />
-          ))}
+      <div>
+        <h2 className="my-4">All Influencers</h2>
+        {/* Profile Cards Section */}
+        <div className="container-flud py-4 bg-black p-2">
+          <div className="row">
+            {profiles.map((profile, index) => (
+              <ProfileCard key={index} profile={profile} />
+            ))}
+          </div>
         </div>
       </div>
-    
-    </div></div>
+    </div>
   );
 };
 

@@ -61,6 +61,12 @@ function Sidebar({ isOpen, toggleSidebar }) {
             <span className="menu-text ms-3">Membership</span>
           </Link>
         </li>
+          <li className="menu-item">
+          <Link to="/dashboard" className="menu-link text-white" onClick={handleSidebarClose}>
+            <i className="fa-solid fa-folder-open me-2"></i>
+            <span className="menu-text ms-3">Dashboard</span>
+          </Link>
+        </li> 
       </ul>
     </div>
   );

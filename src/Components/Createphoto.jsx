@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 
 const CharacterSelection = () => {
-  const [selectedType, setSelectedType] = useState("Male");
+  const [selectedType, setSelectedType] = useState("boy");
   const [selectedShape, setSelectedShape] = useState("");
   const [selectedBreastSize, setSelectedBreastSize] = useState("");
   const [selectedButtSize, setSelectedButtSize] = useState("");
@@ -72,11 +72,11 @@ const CharacterSelection = () => {
           <img
             src="/img/outputboy.jpg"
             alt="Male"
-            className={`img-fluid border rounded p-2 ${selectedType === "Male" ? "border-primary border-2" : ""}`}
+            className={`img-fluid border rounded p-2 ${selectedType === "boy" ? "border-primary border-2" : ""}`}
             style={{ width: "250px", height: "250px" }}
           />
           <br />
-          <Link to="/MaleCreate" className="btn btn-primary mt-2" onClick={() => handleSelectType("Male")}>
+          <Link to="/MaleCreate" className="btn btn-primary mt-2" onClick={() => handleSelectType("boy")}>
             Select Male
           </Link>
         </div>

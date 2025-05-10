@@ -1,16 +1,143 @@
+// // import React, { useEffect, useState } from 'react';
+// // import axios from 'axios';
+
+// // const Gallery = () => {
+// //   const [images, setImages] = useState([]);
+// //   const [loading, setLoading] = useState(true);
+// //   const [error, setError] = useState('');
+
+// //   useEffect(() => {
+// //     const fetchImages = async () => {
+// //       try {
+// //         // Retrieve the user ID from localStorage
+// //         const userId = (localStorage.getItem("user_id"));
+
+// //         console.log(userId)
+
+// //         if (!userId) {
+// //           setError("User is not logged in. Please login.");
+// //           setLoading(false);
+// //           return;
+// //         }
+
+// //         // Make the API request to fetch images
+// //         const response = await axios.get('https://image-generation-production.up.railway.app/image_data', {
+// //           headers: {
+// //             Authorization: `Bearer ${localStorage.getItem("token")}`, // Ensure token is passed in the headers
+// //           },
+// //           params:
+// //           {
+// //             user_id :userId,
+            
+// //           }
+// //         });
+
+// //          console.log(response.data)
+// //                   // Check if the images are available and an array
+// //         const imagesData = response.data;
+
+
+
+
+// //         if (Array.isArray(imagesData.image_url)) {
+// //           // const filteredImages = imagesData.filter(image => image.user_id === userId);
+          
+// //           if (imagesData.length === 0) {
+// //             setError("No images found for this user.");
+// //           } else {
+// //             setImages(imagesData.image_url);
+// //           }
+// //         } else {
+// //           setError('No images data available.');
+// //         }
+// //       } catch (error) {
+// //         setError('Error fetching images. Please try again later.');
+// //         console.error('Error fetching images:', error);
+// //       } finally {
+// //         setLoading(false);
+// //       }
+// //     };
+
+// //     fetchImages();
+// //   }, []);
+
+// //   return (
+// //     <div className="gallery">
+// //       {loading && <p>Loading images...</p>}
+// //       {error && <p>{error}</p>}
+// //       {images.length === 0 && !loading && !error ? (
+// //         <p>No images available.</p>
+// //       ) : (
+// //         <div className="image-grid">
+// //           {images.map((image, index) => (
+// //             <img
+// //               key={index}
+// //               src={image.image_url}
+// //               alt={`Generated ${index}`}
+// //               className="gallery-image"
+// //             />
+// //           ))}
+// //         </div>
+// //       )}
+// //     </div>
+// //   );
+// // };
+
+// // export default Gallery;
+
+
+
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const Gallery = () => {
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/get_generated_images');
-        setImages(response.data.images);
+        // Retrieve the user ID from localStorage
+        const userId = localStorage.getItem("user_id");
+
+        console.log(userId);
+
+        if (!userId) {
+          setError("User is not logged in. Please login.");
+          setLoading(false);
+          return;
+        }
+
+        // Make the API request to fetch images
+        const response = await axios.get('https://image-generation-production.up.railway.app/image_data', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // Ensure token is passed in the headers
+          },
+          params: {
+            user_id: userId,  // Send user_id as a query parameter
+          }
+        });
+
+        console.log(response.data);
+
+        // Check if the response contains images and is an array
+        const imagesData = response.data;
+
+        // Assuming the images data is an array of objects
+        if (Array.isArray(imagesData) && imagesData.length > 0) {
+          // Extract image URLs from the response
+          const imageUrls = imagesData.map((image) => image.image_url);
+          setImages(imageUrls);
+        } else {
+          setError("No images found for this user.");
+        }
       } catch (error) {
+        setError('Error fetching images. Please try again later.');
         console.error('Error fetching images:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -18,15 +145,61 @@ const Gallery = () => {
   }, []);
 
   return (
-    <div className="gallery">
-      {images.length === 0 ? (
-        <p>No images available.</p>
-      ) : (
-        images.map((image, index) => (
-          <img key={index} src={image} alt={`Generated ${index}`} />
-        ))
-      )}
+    <div className="container gallery">
+    <div className="row d-flex justify-content-center align-items-center">
+      <div
+        className="col-md-12"
+        style={{
+          padding: "10px",
+          margin: "10px",
+        }}
+      >
+        {loading && <p>Loading images...</p>}
+        {error && <p>{error}</p>}
+        {images.length === 0 && !loading && !error ? (
+          <p>No images available.</p>
+        ) : (
+          <div className="row">
+            {images.map((image, index) => (
+              <div
+                key={index}
+                className={`col-3 p-2 ${
+                  index === 0 ? "ml-3" : ""} ${index === images.length - 1 ? "mr-3" : ""}`} // Margin for first and last images
+              >
+                {/* Individual Image Container with Border */}
+                <div
+                  className="image-container"
+                  style={{
+                    width: "100%", // Ensure each div takes the full width
+                    height: "auto",
+                    display: "flex", // Flexbox for centering image
+                    justifyContent: "center",
+                    alignItems: "center",
+                    border: "1px solid yellow", // Individual border for each image container
+                    borderRadius: "10px", // Optional rounded corners for the div
+                  }}
+                >
+                  <img
+                    src={image} // Use the image URL directly
+                    alt={`Generated ${index}`}
+                    className="gallery-image"
+                    style={{
+                      width: "100%", // Make the image fill the div
+                      height: "auto", // Keep the aspect ratio intact
+                      borderRadius: "8px", // Optional rounded corners for images
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
+  </div>
+  
+
+  
   );
 };
 

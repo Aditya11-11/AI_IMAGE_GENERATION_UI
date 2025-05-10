@@ -28,8 +28,17 @@ const EyeHairSelection = () => {
   } , [selectedEyeColor, selectedHairColor, selectedHairStyle]);
 
   const handleGenerateImage = async () => {
+
+    const userId = localStorage.getItem("user_id"); // Retrieve user_id from localStorage
+  
+    if (!userId) {
+      console.error("User ID is missing. Please log in.");
+      alert("Please log in to continue.");
+      return;  // Exit early if user_id is not available
+    }
     // Constructing the data as per the request body format
     const generateData = {
+      user_id: userId, 
       gender: localStorage.getItem("gender"),
       age: localStorage.getItem("age"), // Make sure this value is stored in localStorage
       body_shape: localStorage.getItem("body_shape"),
@@ -42,6 +51,14 @@ const EyeHairSelection = () => {
   
     // Log the data to check it
     console.log("Generated Data:", generateData);
+    const token = localStorage.getItem("token");
+    console.log("Token:", token); 
+
+    if (!token) {
+      console.error("Token is missing. Please log in.");
+      alert("Please log in to continue.");
+      return;  // Exit early if token is missing
+    }
   
     try {
       const response = await axios.post(
@@ -50,11 +67,14 @@ const EyeHairSelection = () => {
         {
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         }
       );
   
       console.log("Generated Image:", response.data);
+      localStorage.setItem("generatedImageUrl", response.data.image_url); 
+      
     } catch (error) {
       console.error("Error generating image:", error.response ? error.response.data : error.message);
     }

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CreateImageFinal from "./CreateImageFinal";
 const FemaleDetails = () => {
+  const navigate = useNavigate(); 
+  const image_url = localStorage.getItem("generatedImageUrl");  
   const [formData, setFormData] = useState({
     name: "",
-    lastName: "",
     ethnicity: "",
     age: "",
     tone: "",
@@ -14,7 +15,7 @@ const FemaleDetails = () => {
     nature: "",
     prefered_language: "",
     image: null, // Image will be stored here
-    image_url:"https://api.deepai.org/job-view-file/74722b4e-bdb5-4878-b324-f54f6176595b/outputs/output.jpg", // Default image URL is empty at the beginning
+    image_url:image_url, // Default image URL is empty at the beginning
   });
 
   // Save form data to localStorage whenever it changes
@@ -61,8 +62,11 @@ const FemaleDetails = () => {
       console.log("Generated Image:", response.data);
   
       // Save the generated image URL in localStorage
-      localStorage.setItem("generatedImageUrl", response.data.imageUrl); // Assuming the response has the image URL
+      localStorage.setItem("generatedImageUrl", response.data.image_url); // Assuming the response has the image URL
   
+      const storedUrl = localStorage.getItem("generatedImageUrl");
+      console.log('Stored URL:', storedUrl);
+      
       // Redirect to the '/createimage' page after the image is generated
       navigate("/createimage");
     } catch (error) {
@@ -106,7 +110,7 @@ const FemaleDetails = () => {
           />
         </div>
 
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <label className="form-label">Last Name</label>
           <input
             type="text"
@@ -117,10 +121,10 @@ const FemaleDetails = () => {
             onChange={handleChange}
             required
           />
-        </div>
+        </div> */}
 
         {/* Image URL Input */}
-        {formData.image_url ? (
+        {/* {formData.image_url ? (
           <div className="mb-3">
             <label className="form-label">Image URL</label>
             <input
@@ -141,7 +145,7 @@ const FemaleDetails = () => {
               onChange={handleImageUpload}
             />
           </div>
-        )}
+        )} */}
 
         <div className="mb-3">
           <label className="form-label">Ethnicity</label>
