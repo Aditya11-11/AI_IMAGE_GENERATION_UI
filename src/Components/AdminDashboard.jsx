@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function AdminDashboard() {
-  const [username, setUsername] = useState("azq6w44swt");
+
   const [stats, setStats] = useState({
     balance: 0.0,
     paidOut: 0.0,
@@ -17,6 +17,7 @@ export default function AdminDashboard() {
     messages: 8,
     picturesUnlocked: 0,
   });
+  const userName = localStorage.getItem("user_name");
 
   return (
     <div className="container min-vh-100 bg-dark text-white p-4">
@@ -52,15 +53,12 @@ export default function AdminDashboard() {
 
       {/* Welcome section */}
       <div className="mb-6">
-        <h1 className="h3 font-weight-bold">Welcome back, {username}</h1>
+        <h1 className="h3 font-weight-bold">Welcome back, {userName}</h1>
       </div>
 
       {/* Stats cards */}
       <div className="row row-cols-1 row-cols-md-4 g-4 mb-10">
-  <div
-    className="bg-dark rounded-2 p-4"
-    style={{ border: "1px solid gray" }}
-  >
+  <div className="bg-dark rounded-2 p-4" style={{ border: "1px solid gray"}}>
     <div className="d-flex mb-4">
       <div className="w-10 h-10 rounded-circle bg-success/30 d-flex align-items-center justify-content-center">
         <div className="w-6 h-6 text-success">
@@ -157,19 +155,19 @@ export default function AdminDashboard() {
             </div>
             <div className="d-flex gap-2">
               <button className="btn btn-dark rounded-pill px-4 py-2 text-sm d-flex align-items-center gap-2">
-                <i class="fa-solid fa-message"></i>
+                <i className="fa-solid fa-message"></i>
                 <span>Chat</span>
               </button>
               <button className="btn btn-dark rounded-pill px-4 py-2 text-sm d-flex align-items-center gap-2">
-                <i class="fa-solid fa-image"></i>
+                <i className="fa-solid fa-image"></i>
                 <span>Generate photos</span>
               </button>
               <button className="btn btn-dark rounded-pill px-4 py-2 text-sm d-flex align-items-center gap-2">
-                <i class="fa-solid fa-pen"></i>
+                <i className="fa-solid fa-pen"></i>
                 <span>Edit character</span>
               </button>
               <button className="btn btn-dark rounded-pill w-10 h-10 d-flex align-items-center justify-content-center">
-                <i class="fa-solid fa-grip"></i>
+                <i className="fa-solid fa-grip"></i>
               </button>
             </div>
           </div>
@@ -228,7 +226,7 @@ export default function AdminDashboard() {
               className="w-16 h-16 p-2 rounded-circle  d-flex align-items-center justify-content-center mr-4"
               style={{ border: "1px solid gray " }}
             >
-              <i class="fa-solid fa-plus"></i>
+              <i className="fa-solid fa-plus"></i>
             </div>
             <div className="">
               <h3 className="h5 mt-2font-weight-bold">Extra character slot</h3>
