@@ -44,7 +44,7 @@ const LoginPage = () => {
         console.log("User ID Stored:", localStorage.getItem("user_id"));
   
         // Redirect to the next page after successful login
-        navigate("/earlyaccess");
+        navigate("/dashboard");
       } else {
         setError("Invalid credentials.");
       }

@@ -9,16 +9,25 @@ function Sidebar({ isOpen, toggleSidebar }) {
       toggleSidebar();
     }
   };
-
+ const isLoggedIn = localStorage.getItem("token") ? true : false;
   return (
     <div className={`sidebar ${isOpen ? "open" : ""}`}>
       <ul className="menu">
-        <li className="menu-item">
-          <Link to="/earlyaccess" className="menu-link text-white" onClick={handleSidebarClose}>
-            <i className="fa-regular fa-star me-2"></i>
-            <span className="menu-text ms-3">Home</span>
-          </Link>
-        </li>
+        {isLoggedIn ? (
+          <li className="menu-item">
+            <Link to="/dashboard" className="menu-link text-white" onClick={handleSidebarClose}>
+              <i className="fa-solid fa-folder-open me-2"></i>
+              <span className="menu-text ms-3">Dashboard</span>
+            </Link>
+          </li>
+        ) : (
+          <li className="menu-item">
+            <Link to="/earlyaccess" className="menu-link text-white" onClick={handleSidebarClose}>
+              <i className="fa-regular fa-star me-2"></i>
+              <span className="menu-text ms-3">Home</span>
+            </Link>
+          </li>
+        )}
         <li className="menu-item">
           <a href="#How" className="menu-link text-white" onClick={handleSidebarClose}>
             <i className="fa-solid fa-circle-play me-2"></i>
@@ -31,12 +40,7 @@ function Sidebar({ isOpen, toggleSidebar }) {
             <span className="menu-text ms-3">Explore</span>
           </Link>
         </li>
-        {/* <li className="menu-item">
-          <Link to="/Blog" className="menu-link text-white" onClick={handleSidebarClose}>
-            <i className="fa-solid fa-folder-open me-2"></i>
-            <span className="menu-text ms-3">Blog</span>
-          </Link>
-        </li> */}
+     
         <li className="menu-item">
           <Link to="/Createimg" className="menu-link text-white" onClick={handleSidebarClose}>
             <i className="fa-duotone fa-regular fa-plus me-2"></i>
@@ -61,12 +65,7 @@ function Sidebar({ isOpen, toggleSidebar }) {
             <span className="menu-text ms-3">Membership</span>
           </Link>
         </li>
-          <li className="menu-item">
-          <Link to="/dashboard" className="menu-link text-white" onClick={handleSidebarClose}>
-            <i className="fa-solid fa-folder-open me-2"></i>
-            <span className="menu-text ms-3">Dashboard</span>
-          </Link>
-        </li> 
+         
       </ul>
     </div>
   );
