@@ -42,6 +42,7 @@ import CreateImageFinal from './Components/CreateImageFinal.jsx';
 import AdminDashboard from './Components/AdminDashboard.jsx';
 
 import Chat from './Components/Chat.jsx';
+import ForgotPassword from './Components/ForgotPassword.jsx';
 
 function AppContent() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -87,6 +88,7 @@ function AppContent() {
               <Route path="/home" element={<Home />} />
               <Route path="/createimage" element={<CreateImageFinal />}/>
               <Route path='/chat' element={<Chat/>}/>
+              <Route path="/forgotpasswor" element={<ForgotPassword/>} />
             </Routes>
           </Suspense>
         </div>
