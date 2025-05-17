@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+
 
 const CharacterSelection = () => {
   const [selectedType, setSelectedType] = useState("boy");
@@ -9,21 +10,34 @@ const CharacterSelection = () => {
   const [selectedButtSize, setSelectedButtSize] = useState("");
   const [selectedSkin, setSelectedSkin] = useState("#f3d1c4");
   const [age, setAge] = useState("");
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate(); // For redirecting the user to login
 
   useEffect(() => {
+    const userId = localStorage.getItem("user_id"); // Check if the user is logged in
+    if (!userId) {
+      // Redirect to login page if user is not logged in
+      navigate("/login");
+    } else {
+      // If logged in, set the loading to false to render the page content
+      setLoading(false);
+    }
+
+    // Save the selections to localStorage when they change
     localStorage.setItem("gender", selectedType);
     localStorage.setItem("age", age);
     localStorage.setItem("body_shape", selectedShape);
     localStorage.setItem("breast_size", selectedBreastSize);
     localStorage.setItem("butt_size", selectedButtSize);
     localStorage.setItem("skin_color", selectedSkin);
-  }, [selectedShape, selectedBreastSize, selectedButtSize, selectedSkin,selectedType]);
+  }, [selectedShape, selectedBreastSize, selectedButtSize, selectedSkin, selectedType, age, navigate]);
 
   const handleSelectType = (type) => {
     setSelectedType(type);
     console.log(`Selected: ${type} with Age: ${age}`);
   };
 
+  // Dummy data for body shape, breast size, butt size, and skin colors
   const bodyShapes = [
     { name: "Skinny", img: "/img/outputFamale1.jpg" },
     { name: "Well Built", img: "/img/outputFemale2.jpg" },
@@ -47,7 +61,9 @@ const CharacterSelection = () => {
 
   const skinColors = ["#f3d1c4", "#e3b28f", "#c99674", "#a86d50", "#82523d", "#5d3a2a"];
 
-  return (
+  return loading ? (
+    <div>Loading...</div> // Show loading until the user is logged in
+  ) : (
     <div className="container text-center mt-5 text-white" style={{ paddingBottom: "20px" }}>
       <h2>Your Character Begins Here - Define the Essentials!</h2>
       <p>Choose "Simple" for a simplified experience or "Advanced" for more control.</p>

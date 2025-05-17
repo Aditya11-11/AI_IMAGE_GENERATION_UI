@@ -5,6 +5,7 @@ import axios from "axios";
 const Createimg = () => {
   const navigate = useNavigate();
   const [imageUrl, setImageUrl] = useState(null);
+  
 
   // Load image from localStorage when component mounts
   useEffect(() => {
@@ -14,7 +15,7 @@ const Createimg = () => {
     if (url) {
       setImageUrl(url);
     } else {
-      alert("Image generation failed. Please try again.");
+      alert("Login Required");
       navigate("/Createphoto"); // Redirect if no image found
     }
   }, [navigate]);

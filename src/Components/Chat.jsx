@@ -592,6 +592,8 @@ const Chat = () => {
       );
 
       console.log("Chat deleted successfully:", response.data);
+      fetchChatHistory(selectedUser);
+      
     } catch (error) {
       console.error("Error deleting chat:", error);
       if (error.response) {

@@ -28,12 +28,12 @@ function Sidebar({ isOpen, toggleSidebar }) {
             </Link>
           </li>
         )}
-        <li className="menu-item">
+        {/* <li className="menu-item">
           <a href="#How" className="menu-link text-white" onClick={handleSidebarClose}>
             <i className="fa-solid fa-circle-play me-2"></i>
             <span className="menu-text ms-3">Features</span>
           </a>
-        </li>
+        </li> */}
         <li className="menu-item">
           <Link to="/explore" className="menu-link text-white" onClick={handleSidebarClose}>
             <i className="fa-regular fa-image me-2"></i>

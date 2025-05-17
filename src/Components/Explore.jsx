@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, Navigate } from "react-router-dom";
 
@@ -561,7 +562,56 @@ const ProfileCard = ({ profile }) => (
   </div>
 );
 
+
 const Explore = () => {
+  const [images, setImages] = useState([]);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const userId = localStorage.getItem("user_id");
+        // if (!userId) {
+        //   setError("User is not logged in. Please login.");
+        //   setLoading(false);
+        //   return;
+        // }
+
+        const response = await axios.get('https://image-generation-production.up.railway.app/image_data', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          params: { user_id: userId }
+        });
+
+        const imagesData = response.data;
+        if (Array.isArray(imagesData) && imagesData.length > 0) {
+          const imageUrls = imagesData.map((image) => image.image_url);
+          setImages(imageUrls);
+        } else {
+          setError("No images found for this user.");
+        }
+      // } catch (err) {
+      //   setError('Error fetching images. Please try again later.');
+      //   console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchImages();
+  }, []);
+
+  // Split images into chunks of 4 per carousel-item
+  const chunkedImages = [];
+  for (let i = 0; i < images.length; i += 4) {
+    chunkedImages.push(images.slice(i, i + 4));
+  }
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <div className="container">
       <h1 className="my-4">Trending Today</h1>
@@ -578,33 +628,33 @@ const Explore = () => {
 
       {/* Carousel */}
       <div
-        id="influencerCarousel"
-        className="carousel slide"
-        data-ride="carousel"
-        data-interval="3000"
-      >
-        <div className="carousel-inner">
-          <div className="carousel-item active">
+      id="influencerCarousel"
+      className="carousel slide"
+      data-ride="carousel"
+      data-interval="3000"
+    >
+      <div className="carousel-inner">
+        {chunkedImages.map((group, idx) => (
+          <div key={idx} className={`carousel-item ${idx === 0 ? "active" : ""}`}>
             <div className="row">
-              {[1, 2, 3, 4].map((index) => (
+              {group.map((imageUrl, index) => (
                 <div key={index} className="col-12 col-md-6 col-lg-3">
-                  <div className="card ">
-                    <img src="img/output1.jpg" className="card-img-top" />
+                  <div className="card h-100">
+                    <img src={imageUrl} className="card-img-top" alt={`Image ${index}`} />
                     <div className="card-body">
-                      <h5 className="card-title">Card title {index}</h5>
+                      <h5 className="card-title">Card title {index + 1}</h5>
                       <span className="text-sm bg-light me-3">18</span>
                       <span className="text-sm bg-light me-3">skinny</span>
                       <span className="text-sm bg-light">blindly</span>
                       <p className="card-text">
                         This is a longer card with supporting text below as a
-                        natural lead-in to additional content. This content is a
-                        little bit longer.
+                        natural lead-in to additional content.
                       </p>
                       <div>
                         <button className="btn btn-light me-4">Follow</button>
-                       <Link to="/chat">
+                        <Link to="/chat">
                           <button className="btn btn-dark">Chat</button>
-                          </Link>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -612,47 +662,8 @@ const Explore = () => {
               ))}
             </div>
           </div>
-          <div className="carousel-item">
-            <div className="row">
-              {[5, 6, 7, 8].map((index) => (
-                <div key={index} className="col-12 col-md-6 col-lg-3">
-                  <div className="card h-100">
-                    <img src="" className="card-img-top" />
-                    <div className="card-body">
-                      <h5 className="card-title">Card title {index}</h5>
-                      <span className="text-sm bg-light me-3">18</span>
-                      <span className="text-sm bg-light me-3">skinny</span>
-                      <span className="text-sm bg-light">blindly</span>
-                      <p className="card-text">
-                        This is a longer card with supporting text below as a
-                        natural lead-in to additional content. This content is a
-                        little bit longer.
-                      </p>
-                      <div>
-                        <button className="btn btn-light">Follow</button>
-                        <button className="btn btn-dark">Chat</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-    
-          <span
-            className="carousel-control-prev-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="sr-only">Previous</span>
-      
-      
-          <span
-            className="carousel-control-next-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="sr-only">Next</span>
-      
+        ))}
+      </div>
       </div>
       <div>
         <h2 className="my-4">All Influencers</h2>

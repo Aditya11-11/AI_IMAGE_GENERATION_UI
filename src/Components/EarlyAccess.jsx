@@ -205,9 +205,11 @@ const HeroSection = () => {
                                 Launch your custom AI influencers and watch them engage audiences that drive real revenue.
                                 It’s easy, fast, and fully customizable!
                             </p>
-                            <a href="#create" className="btn btn-light btn-lg fw-bold shadow-sm">
-                                🚀 Create your Influencer
-                            </a>
+                            <Link to="/Createimg">
+                            <button className="btn btn-light btn-lg fw-bold shadow-sm">
+                                🚀 Create your image
+                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
