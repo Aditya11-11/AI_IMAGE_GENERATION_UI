@@ -43,6 +43,7 @@ import AdminDashboard from './Components/AdminDashboard.jsx';
 
 import Chat from './Components/Chat.jsx';
 import ForgotPassword from './Components/ForgotPassword.jsx';
+import GoogleCallback from './Components/GoogleCallback.jsx';
 
 function AppContent() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -89,6 +90,7 @@ function AppContent() {
               <Route path="/createimage" element={<CreateImageFinal />}/>
               <Route path='/chat' element={<Chat/>}/>
               <Route path="/forgotpasswor" element={<ForgotPassword/>} />
+              <Route path="/google-auth-callback" element={<GoogleCallback />} />
             </Routes>
           </Suspense>
         </div>
