@@ -13,7 +13,7 @@ const profiles = [
         username: "hatsuneaogamer",
         tag: "fit",
         image: "img/output1.jpg",
-    },
+    },   
     {
         id: 2,
         name: "Lina Ahlam",
@@ -144,6 +144,72 @@ const ProfileCard = ({ profile }) => (
     </div>
 );
 
+// const ProfileCard = ({ profile }) => (
+//     <div className="col-6 col-md-4 col-lg-3 mb-4">
+//         <Link to={`/profile/${profile.id}`} className="text-decoration-none">
+//             <div className="position-relative overflow-hidden rounded text-white bg-black hover-zoom">
+//                 <img 
+//                     src={profile.image_url} 
+//                     className="w-100 object-fit-cover img-zoom" 
+//                     alt={profile.image_name} 
+//                     style={{ height: '450px' }}
+//                 />
+//                 <div className="position-absolute top-0 start-0 text-white fw-bold py-1 px-2 small rounded-bottom-end">
+//                     Private Content
+//                 </div>
+//                 <div className="position-absolute bottom-0 start-0 w-100 p-1">
+//                     <h5 className="mb-1">{profiles.image}</h5>
+//                     <p className="small mb-2">{profile.prompt}</p>
+//                     <div className="d-flex justify-content-between">
+//                         <span className="badge bg-dark">ID: {profile.id}</span>
+//                         <span className="badge bg-secondary">User: {profile.user_id}</span>
+//                     </div>
+//                 </div>
+//             </div>
+//         </Link>
+//     </div>
+// );
+
+// ProfileGallery Component
+const ProfileGallery = () => {
+    const [profiles, setProfiles] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchProfiles = async () => {
+            try {
+                const token = localStorage.getItem("token"); // Store your JWT here
+                const res = await axios.get('https://image-generation-production.up.railway.app/image_data', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setProfiles(res.data);
+            } catch (err) {
+                setError('Failed to load profiles.');
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProfiles();
+    }, []);
+
+    if (loading) return <div className="text-center">Loading...</div>;
+    if (error) return <div className="text-danger text-center">{error}</div>;
+
+    return (
+        <div className="container mt-4">
+            <div className="row">
+                {profiles.map(profile => (
+                    <ProfileCard key={profile.id} profile={profile} />
+                ))}
+            </div>
+        </div>
+    );
+};
 
 const faqs = [
     { question: "What are payout fees?", answer: "Payout fees vary depending on your chosen payout method and location." },
@@ -159,7 +225,7 @@ const faqs = [
 ];
 
 
-const HeroSection = () => {
+const EarlyAccess = () => {
 
     const [followers, setFollowers] = useState(1000);
     const [subscriptionPrice, setSubscriptionPrice] = useState(9.99);
@@ -196,17 +262,17 @@ const HeroSection = () => {
                         </div>
 
                         {/* Right - Text & CTA */}
-                        <div className="col-12 col-md-6 text-center text-md-start">
-                            <span className="badge bg-light text-dark mb-3">⭐ #1 AI Influencer generator</span>
-                            <h1 className="display-5 fw-bold">
+                        <div className="col-12 col-md-6 text-center text-md-start py-2">
+                            <span className="badge bg-light text-dark mb-3 p-2">⭐ #1 AI Influencer generator</span>
+                            <h1 className="display-6 fw-bold">
                                 Create your own <span className="text-primary">AI Influencer</span>
                             </h1>
-                            <p className="lead">
+                            <p className="lead fs-6">
                                 Launch your custom AI influencers and watch them engage audiences that drive real revenue.
                                 It’s easy, fast, and fully customizable!
                             </p>
                             <Link to="/Createimg">
-                            <button className="btn btn-light btn-lg fw-bold shadow-sm">
+                            <button className="btn btn-light btn-m fw-bold shadow-sm">
                                 🚀 Create your image
                             </button>
                             </Link>
@@ -216,8 +282,8 @@ const HeroSection = () => {
             </section>
 
             {/* Profile Cards Section */}
-            <div className="container-fluid py-4 bg-black">
-                <div className="row g-1">
+            <div className="container-fluid py-2 bg-black">
+                <div className="row g-2">
                     {profiles.map((profile) => (
                         <ProfileCard key={profile.id} profile={profile} />
                     ))}
@@ -550,4 +616,4 @@ const HeroSection = () => {
     );
 };
 
-export default HeroSection;
+export default EarlyAccess;

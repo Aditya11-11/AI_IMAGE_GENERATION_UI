@@ -70,7 +70,7 @@ function Header({ toggleSidebar }) {
   localStorage.clear();
   setToken(null); // Clear token from state
   setIsLoggedIn(false);
-  navigate("/earlyaccess");
+  navigate("/");
 };
 
   return (

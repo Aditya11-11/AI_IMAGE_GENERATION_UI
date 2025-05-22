@@ -78,6 +78,18 @@ const FemaleDetails = () => {
     "Argentinean", "American", "Indian", "Chinese", "French", "German",
     "Japanese", "Brazilian", "Mexican", "Canadian", "Italian", "Spanish",
   ];
+  const tone = [
+    "Calm", "Cheerful", "Formal", "Friendly", "Informal", "Serious",
+  ];
+  const talking = [
+    "Fast", "Slow", "Clear", "Mumbled", "Excited", "Bored",
+  ];
+  const nature = [
+    "Curious", "Cautious", "Adventurous", "Shy", "Outgoing", "Reserved",
+  ];
+  const prefered_language = [
+    "English", "Spanish", "French", "German", "Chinese", "Japanese",
+  ];
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -182,60 +194,80 @@ const FemaleDetails = () => {
         {/* Other fields */}
         <div className="mb-3">
           <label className="form-label">Tone</label>
-          <input
-            type="text"
-            placeholder="Enter Tone"
-            className="form-control bg-dark text-white border-0"
+          <select
+            className="form-select bg-dark text-white border-0"
             name="tone"
             value={formData.tone}
             onChange={handleChange}
             required
-          />
+          >
+            <option value="">Select</option>
+            {tone.map((toneOption) => (
+              <option key={toneOption} value={toneOption}>
+                {toneOption}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="mb-3">
           <label className="form-label">Way of Talking</label>
-          <input
-            type="text"
-            placeholder="Enter Talking"
-            className="form-control bg-dark text-white border-0"
+          <select
+            className="form-select bg-dark text-white border-0"
             name="talking"
             value={formData.talking}
             onChange={handleChange}
             required
-          />
+          >
+            <option value="">Select</option>
+            {talking.map((talkingOption) => (
+              <option key={talkingOption} value={talkingOption}>
+                {talkingOption}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="mb-3">
           <label className="form-label">Nature</label>
-          <input
-            type="text"
-            placeholder="Enter Nature"
-            className="form-control bg-dark text-white border-0"
+          <select
+            className="form-select bg-dark text-white border-0"
             name="nature"
             value={formData.nature}
             onChange={handleChange}
             required
-          />
+          >
+            <option value="">Select Nature</option>
+            {nature.map((natureOption) => (
+              <option key={natureOption} value={natureOption}>
+                {natureOption}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="mb-3">
           <label className="form-label">Preferred Language</label>
-          <input
-            type="text"
-            placeholder="Enter Preferred Language"
-            className="form-control bg-dark text-white border-0"
+          <select
+            className="form-select bg-dark text-white border-0"
             name="prefered_language"
             value={formData.prefered_language}
             onChange={handleChange}
             required
-          />
+          >
+            <option value="">Select Language</option>
+            {prefered_language.map((languageOption) => (
+              <option key={languageOption} value={languageOption}>
+                {languageOption}
+              </option>
+            ))}
+          </select>
         </div>
       </form>
 
       {/* Navigation Buttons */}
       <div className="d-flex justify-content-between mt-4">
-        <Link to="/FemaleRelation" className="btn btn-dark px-5 py-2">← Previous</Link>
+        <Link to="/FemaleRelation" className="btn btn-dark px-5 py-2">← Previous</Link> 
         <Link to="/createimage" className="btn btn-dark px-5 py-2" onClick={handleGenerateImage}>Next →</Link>
       </div>
     </div>
@@ -243,3 +275,4 @@ const FemaleDetails = () => {
 };
 
 export default FemaleDetails;
+

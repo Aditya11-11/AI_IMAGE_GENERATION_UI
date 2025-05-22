@@ -5,18 +5,13 @@ import axios from "axios";
 const Createimg = () => {
   const navigate = useNavigate();
   const [imageUrl, setImageUrl] = useState(null);
-  
 
   // Load image from localStorage when component mounts
   useEffect(() => {
     const url = localStorage.getItem("generatedImageUrl");
-    
-    console.log('Stored URL:', url);
+    console.log("Stored URL:", url);
     if (url) {
-      setImageUrl(url);
-    } else {
-      alert("Login Required");
-      navigate("/Createphoto"); // Redirect if no image found
+      setImageUrl(url);        
     }
   }, [navigate]);
 
@@ -29,38 +24,39 @@ const Createimg = () => {
 
     const userId = localStorage.getItem("user_id"); // Get user ID from localStorage
     const token = localStorage.getItem("token"); // Get the user's token (if needed for authorization)
-  
+    navigate("/Createphoto");
     if (!userId || !token) {
       alert("User is not logged in. Please log in to save the image.");
       return;
     }
-  
+
     const imageData = {
       user_id: userId, // Send the user_id with the image data
       image_url: imageUrl, // Send the image URL to be saved
     };
-  
+
     // Ensure full URL is sent to backend
     // const fullImageUrl = imageUrl.startsWith("http") ? imageUrl : `http://${imageUrl}`;
-    
+
     // console.log("Sending image URL:", fullImageUrl); // Debugging
-  
-  //   try {
-  //     const res = await axios.post(
-  //       "http://localhost:5000/save-image",
-  //       { image_url: url }, // Send full URL
-  //       { headers: { "Content-Type": "application/json" } } // Ensure JSON format
-  //     );
-  
-  //     if (res.data.success) {
-  //       alert("Image saved successfully!");
-  //     } else {
-  //       alert("Error: " + res.data.error);
-  //     }
-  //   } catch (error) {
-  //     console.error("AxiosError", error);
-  //     alert("Failed to save image. Check console for details.");
-  //   }
+
+    //   try {
+    //     const res = await axios.post(
+    //       "http://localhost:5000/save-image",
+    //       { image_url: url }, // Send full URL
+    //       { headers: { "Content-Type": "application/json" } } // Ensure JSON format
+    //     );
+
+    //     if (res.data.success) {
+    //       alert("Image saved successfully!");
+    //     } else {
+    //       alert("Error: " + res.data.error);
+    //     }
+    //   } catch (error) {
+    //     console.error("AxiosError", error);
+    //     alert("Failed to save image. Check console for details.");
+    //   }
+      navigate("/dashboard");
   };
   // Handle skipping image
   const handleSkip = () => {
@@ -71,7 +67,10 @@ const Createimg = () => {
   return (
     <div className="container text-center mt-5 text-white">
       <h2>Say Hello to Your Creation!</h2>
-      <p>It's time to see what your new character can do. Let the adventure begin!</p>
+      <p>
+        It's time to see what your new character can do. Let the adventure
+        begin!
+      </p>
 
       {imageUrl ? (
         <img

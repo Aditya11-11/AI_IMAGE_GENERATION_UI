@@ -51,6 +51,7 @@ function AppContent() {
 
   const isAuthPage = ["/login", "/signup"].includes(location.pathname);
 
+
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
   return (
@@ -61,8 +62,8 @@ function AppContent() {
         <div className="main-content">
           <Suspense fallback={<Loader />}>
             <Routes>
-              <Route path="/" element={<EarlyAccess />} />
-              <Route path="/earlyaccess" element={<EarlyAccess />} />
+              <Route path="/" element={<EarlyAccess/>} />
+              {/* <Route path="/earlyaccess" element={<EarlyAccess/>} /> */}
               <Route path='/dashboard' element={<AdminDashboard/>}/>
               
               <Route path="/getaccess" element={<GetAccess />} />

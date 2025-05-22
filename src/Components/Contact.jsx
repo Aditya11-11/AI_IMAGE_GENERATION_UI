@@ -4,10 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function ContactPage() {
   return (
-    <div className="container py-5">
+    <div className="container py-4">
     <h2 className="text-center fw-bold">Contact Us</h2>
-    
-    
     <div className="row mt-4">
       {/* Contact Details */}
       <div className="col-md-5 text-light bg-dark p-4 rounded">
@@ -35,7 +33,7 @@ function ContactPage() {
       </div>
 
       {/* Contact Form */}
-      <div className="col-md-7 mt-5">
+      <div className="col-md-6 mt-5">
         <div className="bg-white p-4 shadow rounded">
           <h4 className="fw-bold">Send Message</h4>
           <form>
@@ -63,7 +61,7 @@ function ContactPage() {
       {/* Embedded Google Map */}
       <div className="row mt-0">
         <div className="col">
-          <h2 className="text-center mb-3">Our Location</h2>
+          <h2 className="text-center mb-3 mt-3">Our Location</h2>
           <div className="embed-responsive embed-responsive-16by9">
             <iframe
               title="Google Map"

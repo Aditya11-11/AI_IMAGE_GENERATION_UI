@@ -1,537 +1,6 @@
-import React, { useEffect, useState } from "react";
-import axios from 'axios';
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Link, Navigate } from "react-router-dom";
-
-const profiles = [
-  {
-    name: "Hatsune Ao",
-    age: 25,
-    description:
-      "Dance instructor by day, gamer and cosplayer by night. Passionate about dance, gaming...",
-    username: "hatsuneaogamer",
-    tag: "fit",
-    image: "img/output1.jpg", // Replace with actual image
-  },
-  {
-    name: "Lina Ahlam",
-    age: 23,
-    description:
-      "Model 📸 Bookworm 📚 Yoga Enthusiast 🧘 Cosplay Lover 💜 Always playful, forever te...",
-    username: "linaalamode23",
-    tag: "skinny",
-    image: "img/output2.jpg", // Replace with actual image
-  },
-  {
-    name: "Isabella Rojas",
-    age: 18,
-    description:
-      "Isabella Rojas | Fitness & Yoga Enthusiast | Nature Lover | Dreamer | Student 📚...",
-    username: "fitbella_203",
-    tag: "fit",
-    image: "img/output3.jpg", // Replace with actual image
-  },
-  {
-    name: "Bella69",
-    age: 26,
-    description: "Hey Guys",
-    username: "bella69",
-    tag: "fit",
-    image: "img/output4.jpg", // Replace with actual image
-  },
-  {
-    name: "Hatsune Ao",
-    age: 25,
-    description:
-      "Dance instructor by day, gamer and cosplayer by night. Passionate about dance, gaming...",
-    username: "hatsuneaogamer",
-    tag: "fit",
-    image: "img/output1.jpg", // Replace with actual image
-  },
-  {
-    name: "Lina Ahlam",
-    age: 23,
-    description:
-      "Model 📸 Bookworm 📚 Yoga Enthusiast 🧘 Cosplay Lover 💜 Always playful, forever te...",
-    username: "linaalamode23",
-    tag: "skinny",
-    image: "img/output2.jpg", // Replace with actual image
-  },
-  {
-    name: "Isabella Rojas",
-    age: 18,
-    description:
-      "Isabella Rojas | Fitness & Yoga Enthusiast | Nature Lover | Dreamer | Student 📚...",
-    username: "fitbella_203",
-    tag: "fit",
-    image: "img/output3.jpg", // Replace with actual image
-  },
-  {
-    name: "Bella69",
-    age: 26,
-    description: "Hey Guys",
-    username: "bella69",
-    tag: "fit",
-    image: "img/output4.jpg", // Replace with actual image
-  },
-  {
-    name: "Hatsune Ao",
-    age: 25,
-    description:
-      "Dance instructor by day, gamer and cosplayer by night. Passionate about dance, gaming...",
-    username: "hatsuneaogamer",
-    tag: "fit",
-    image: "img/output1.jpg", // Replace with actual image
-  },
-  {
-    name: "Lina Ahlam",
-    age: 23,
-    description:
-      "Model 📸 Bookworm 📚 Yoga Enthusiast 🧘 Cosplay Lover 💜 Always playful, forever te...",
-    username: "linaalamode23",
-    tag: "skinny",
-    image: "img/output2.jpg", // Replace with actual image
-  },
-  {
-    name: "Isabella Rojas",
-    age: 18,
-    description:
-      "Isabella Rojas | Fitness & Yoga Enthusiast | Nature Lover | Dreamer | Student 📚...",
-    username: "fitbella_203",
-    tag: "fit",
-    image: "img/output3.jpg", // Replace with actual image
-  },
-  {
-    name: "Bella69",
-    age: 26,
-    description: "Hey Guys",
-    username: "bella69",
-    tag: "fit",
-    image: "img/output4.jpg", // Replace with actual image
-  },
-  {
-    name: "Hatsune Ao",
-    age: 25,
-    description:
-      "Dance instructor by day, gamer and cosplayer by night. Passionate about dance, gaming...",
-    username: "hatsuneaogamer",
-    tag: "fit",
-    image: "img/output1.jpg", // Replace with actual image
-  },
-  {
-    name: "Lina Ahlam",
-    age: 23,
-    description:
-      "Model 📸 Bookworm 📚 Yoga Enthusiast 🧘 Cosplay Lover 💜 Always playful, forever te...",
-    username: "linaalamode23",
-    tag: "skinny",
-    image: "img/output2.jpg", // Replace with actual image
-  },
-  {
-    name: "Isabella Rojas",
-    age: 18,
-    description:
-      "Isabella Rojas | Fitness & Yoga Enthusiast | Nature Lover | Dreamer | Student 📚...",
-    username: "fitbella_203",
-    tag: "fit",
-    image: "img/output3.jpg", // Replace with actual image
-  },
-  {
-    name: "Bella69",
-    age: 26,
-    description: "Hey Guys",
-    username: "bella69",
-    tag: "fit",
-    image: "img/output4.jpg", // Replace with actual image
-  },
-  {
-    name: "Hatsune Ao",
-    age: 25,
-    description:
-      "Dance instructor by day, gamer and cosplayer by night. Passionate about dance, gaming...",
-    username: "hatsuneaogamer",
-    tag: "fit",
-    image: "img/output1.jpg", // Replace with actual image
-  },
-  {
-    name: "Lina Ahlam",
-    age: 23,
-    description:
-      "Model 📸 Bookworm 📚 Yoga Enthusiast 🧘 Cosplay Lover 💜 Always playful, forever te...",
-    username: "linaalamode23",
-    tag: "skinny",
-    image: "img/output2.jpg", // Replace with actual image
-  },
-  {
-    name: "Isabella Rojas",
-    age: 18,
-    description:
-      "Isabella Rojas | Fitness & Yoga Enthusiast | Nature Lover | Dreamer | Student 📚...",
-    username: "fitbella_203",
-    tag: "fit",
-    image: "img/output3.jpg", // Replace with actual image
-  },
-  {
-    name: "Bella69",
-    age: 26,
-    description: "Hey Guys",
-    username: "bella69",
-    tag: "fit",
-    image: "img/output4.jpg", // Replace with actual image
-  },
-  {
-    name: "Hatsune Ao",
-    age: 25,
-    description:
-      "Dance instructor by day, gamer and cosplayer by night. Passionate about dance, gaming...",
-    username: "hatsuneaogamer",
-    tag: "fit",
-    image: "img/output1.jpg", // Replace with actual image
-  },
-  {
-    name: "Lina Ahlam",
-    age: 23,
-    description:
-      "Model 📸 Bookworm 📚 Yoga Enthusiast 🧘 Cosplay Lover 💜 Always playful, forever te...",
-    username: "linaalamode23",
-    tag: "skinny",
-    image: "img/output2.jpg", // Replace with actual image
-  },
-  {
-    name: "Isabella Rojas",
-    age: 18,
-    description:
-      "Isabella Rojas | Fitness & Yoga Enthusiast | Nature Lover | Dreamer | Student 📚...",
-    username: "fitbella_203",
-    tag: "fit",
-    image: "img/output3.jpg", // Replace with actual image
-  },
-  {
-    name: "Bella69",
-    age: 26,
-    description: "Hey Guys",
-    username: "bella69",
-    tag: "fit",
-    image: "img/output4.jpg", // Replace with actual image
-  },
-  {
-    name: "Hatsune Ao",
-    age: 25,
-    description:
-      "Dance instructor by day, gamer and cosplayer by night. Passionate about dance, gaming...",
-    username: "hatsuneaogamer",
-    tag: "fit",
-    image: "img/output1.jpg", // Replace with actual image
-  },
-  {
-    name: "Lina Ahlam",
-    age: 23,
-    description:
-      "Model 📸 Bookworm 📚 Yoga Enthusiast 🧘 Cosplay Lover 💜 Always playful, forever te...",
-    username: "linaalamode23",
-    tag: "skinny",
-    image: "img/output2.jpg", // Replace with actual image
-  },
-  {
-    name: "Isabella Rojas",
-    age: 18,
-    description:
-      "Isabella Rojas | Fitness & Yoga Enthusiast | Nature Lover | Dreamer | Student 📚...",
-    username: "fitbella_203",
-    tag: "fit",
-    image: "img/output3.jpg", // Replace with actual image
-  },
-  {
-    name: "Bella69",
-    age: 26,
-    description: "Hey Guys",
-    username: "bella69",
-    tag: "fit",
-    image: "img/output4.jpg", // Replace with actual image
-  },
-  {
-    name: "Hatsune Ao",
-    age: 25,
-    description:
-      "Dance instructor by day, gamer and cosplayer by night. Passionate about dance, gaming...",
-    username: "hatsuneaogamer",
-    tag: "fit",
-    image: "img/output1.jpg", // Replace with actual image
-  },
-  {
-    name: "Lina Ahlam",
-    age: 23,
-    description:
-      "Model 📸 Bookworm 📚 Yoga Enthusiast 🧘 Cosplay Lover 💜 Always playful, forever te...",
-    username: "linaalamode23",
-    tag: "skinny",
-    image: "img/output2.jpg", // Replace with actual image
-  },
-  {
-    name: "Isabella Rojas",
-    age: 18,
-    description:
-      "Isabella Rojas | Fitness & Yoga Enthusiast | Nature Lover | Dreamer | Student 📚...",
-    username: "fitbella_203",
-    tag: "fit",
-    image: "img/output3.jpg", // Replace with actual image
-  },
-  {
-    name: "Bella69",
-    age: 26,
-    description: "Hey Guys",
-    username: "bella69",
-    tag: "fit",
-    image: "img/output4.jpg", // Replace with actual image
-  },
-  {
-    name: "Hatsune Ao",
-    age: 25,
-    description:
-      "Dance instructor by day, gamer and cosplayer by night. Passionate about dance, gaming...",
-    username: "hatsuneaogamer",
-    tag: "fit",
-    image: "img/output1.jpg", // Replace with actual image
-  },
-  {
-    name: "Lina Ahlam",
-    age: 23,
-    description:
-      "Model 📸 Bookworm 📚 Yoga Enthusiast 🧘 Cosplay Lover 💜 Always playful, forever te...",
-    username: "linaalamode23",
-    tag: "skinny",
-    image: "img/output2.jpg", // Replace with actual image
-  },
-  {
-    name: "Isabella Rojas",
-    age: 18,
-    description:
-      "Isabella Rojas | Fitness & Yoga Enthusiast | Nature Lover | Dreamer | Student 📚...",
-    username: "fitbella_203",
-    tag: "fit",
-    image: "img/output3.jpg", // Replace with actual image
-  },
-  {
-    name: "Bella69",
-    age: 26,
-    description: "Hey Guys",
-    username: "bella69",
-    tag: "fit",
-    image: "img/output4.jpg", // Replace with actual image
-  },
-  {
-    name: "Hatsune Ao",
-    age: 25,
-    description:
-      "Dance instructor by day, gamer and cosplayer by night. Passionate about dance, gaming...",
-    username: "hatsuneaogamer",
-    tag: "fit",
-    image: "img/output1.jpg", // Replace with actual image
-  },
-  {
-    name: "Lina Ahlam",
-    age: 23,
-    description:
-      "Model 📸 Bookworm 📚 Yoga Enthusiast 🧘 Cosplay Lover 💜 Always playful, forever te...",
-    username: "linaalamode23",
-    tag: "skinny",
-    image: "img/output2.jpg", // Replace with actual image
-  },
-  {
-    name: "Isabella Rojas",
-    age: 18,
-    description:
-      "Isabella Rojas | Fitness & Yoga Enthusiast | Nature Lover | Dreamer | Student 📚...",
-    username: "fitbella_203",
-    tag: "fit",
-    image: "img/output3.jpg", // Replace with actual image
-  },
-  {
-    name: "Bella69",
-    age: 26,
-    description: "Hey Guys",
-    username: "bella69",
-    tag: "fit",
-    image: "img/output4.jpg", // Replace with actual image
-  },
-  {
-    name: "Hatsune Ao",
-    age: 25,
-    description:
-      "Dance instructor by day, gamer and cosplayer by night. Passionate about dance, gaming...",
-    username: "hatsuneaogamer",
-    tag: "fit",
-    image: "img/output1.jpg", // Replace with actual image
-  },
-  {
-    name: "Lina Ahlam",
-    age: 23,
-    description:
-      "Model 📸 Bookworm 📚 Yoga Enthusiast 🧘 Cosplay Lover 💜 Always playful, forever te...",
-    username: "linaalamode23",
-    tag: "skinny",
-    image: "img/output2.jpg", // Replace with actual image
-  },
-  {
-    name: "Isabella Rojas",
-    age: 18,
-    description:
-      "Isabella Rojas | Fitness & Yoga Enthusiast | Nature Lover | Dreamer | Student 📚...",
-    username: "fitbella_203",
-    tag: "fit",
-    image: "img/output3.jpg", // Replace with actual image
-  },
-  {
-    name: "Bella69",
-    age: 26,
-    description: "Hey Guys",
-    username: "bella69",
-    tag: "fit",
-    image: "img/output4.jpg", // Replace with actual image
-  },
-  {
-    name: "Hatsune Ao",
-    age: 25,
-    description:
-      "Dance instructor by day, gamer and cosplayer by night. Passionate about dance, gaming...",
-    username: "hatsuneaogamer",
-    tag: "fit",
-    image: "img/output1.jpg", // Replace with actual image
-  },
-  {
-    name: "Lina Ahlam",
-    age: 23,
-    description:
-      "Model 📸 Bookworm 📚 Yoga Enthusiast 🧘 Cosplay Lover 💜 Always playful, forever te...",
-    username: "linaalamode23",
-    tag: "skinny",
-    image: "img/output2.jpg", // Replace with actual image
-  },
-  {
-    name: "Isabella Rojas",
-    age: 18,
-    description:
-      "Isabella Rojas | Fitness & Yoga Enthusiast | Nature Lover | Dreamer | Student 📚...",
-    username: "fitbella_203",
-    tag: "fit",
-    image: "img/output3.jpg", // Replace with actual image
-  },
-  {
-    name: "Bella69",
-    age: 26,
-    description: "Hey Guys",
-    username: "bella69",
-    tag: "fit",
-    image: "img/output4.jpg", // Replace with actual image
-  },
-  {
-    name: "Hatsune Ao",
-    age: 25,
-    description:
-      "Dance instructor by day, gamer and cosplayer by night. Passionate about dance, gaming...",
-    username: "hatsuneaogamer",
-    tag: "fit",
-    image: "img/output1.jpg", // Replace with actual image
-  },
-  {
-    name: "Lina Ahlam",
-    age: 23,
-    description:
-      "Model 📸 Bookworm 📚 Yoga Enthusiast 🧘 Cosplay Lover 💜 Always playful, forever te...",
-    username: "linaalamode23",
-    tag: "skinny",
-    image: "img/output2.jpg", // Replace with actual image
-  },
-  {
-    name: "Isabella Rojas",
-    age: 18,
-    description:
-      "Isabella Rojas | Fitness & Yoga Enthusiast | Nature Lover | Dreamer | Student 📚...",
-    username: "fitbella_203",
-    tag: "fit",
-    image: "img/output3.jpg", // Replace with actual image
-  },
-  {
-    name: "Bella69",
-    age: 26,
-    description: "Hey Guys",
-    username: "bella69",
-    tag: "fit",
-    image: "img/output4.jpg", // Replace with actual image
-  },
-  {
-    name: "Hatsune Ao",
-    age: 25,
-    description:
-      "Dance instructor by day, gamer and cosplayer by night. Passionate about dance, gaming...",
-    username: "hatsuneaogamer",
-    tag: "fit",
-    image: "img/output1.jpg", // Replace with actual image
-  },
-  {
-    name: "Lina Ahlam",
-    age: 23,
-    description:
-      "Model 📸 Bookworm 📚 Yoga Enthusiast 🧘 Cosplay Lover 💜 Always playful, forever te...",
-    username: "linaalamode23",
-    tag: "skinny",
-    image: "img/output2.jpg", // Replace with actual image
-  },
-  {
-    name: "Isabella Rojas",
-    age: 18,
-    description:
-      "Isabella Rojas | Fitness & Yoga Enthusiast | Nature Lover | Dreamer | Student 📚...",
-    username: "fitbella_203",
-    tag: "fit",
-    image: "img/output3.jpg", // Replace with actual image
-  },
-  {
-    name: "Bella69",
-    age: 26,
-    description: "Hey Guys",
-    username: "bella69",
-    tag: "fit",
-    image: "img/output4.jpg", // Replace with actual image
-  },
-  {
-    name: "Hatsune Ao",
-    age: 25,
-    description:
-      "Dance instructor by day, gamer and cosplayer by night. Passionate about dance, gaming...",
-    username: "hatsuneaogamer",
-    tag: "fit",
-    image: "img/output1.jpg", // Replace with actual image
-  },
-  {
-    name: "Lina Ahlam",
-    age: 23,
-    description:
-      "Model 📸 Bookworm 📚 Yoga Enthusiast 🧘 Cosplay Lover 💜 Always playful, forever te...",
-    username: "linaalamode23",
-    tag: "skinny",
-    image: "img/output2.jpg", // Replace with actual image
-  },
-  {
-    name: "Isabella Rojas",
-    age: 18,
-    description:
-      "Isabella Rojas | Fitness & Yoga Enthusiast | Nature Lover | Dreamer | Student 📚...",
-    username: "fitbella_203",
-    tag: "fit",
-    image: "img/output3.jpg", // Replace with actual image
-  },
-  {
-    name: "Bella69",
-    age: 26,
-    description: "Hey Guys",
-    username: "bella69",
-    tag: "fit",
-    image: "img/output4.jpg", // Replace with actual image
-  },
-
-  // Add more profiles as needed
-];
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const ProfileCard = ({ profile }) => (
   <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
@@ -542,12 +11,9 @@ const ProfileCard = ({ profile }) => (
         alt={profile.name}
         style={{ height: "450px" }}
       />
-      {/* Private Badge */}
       <div className="position-absolute top-0 start-0 text-white fw-bold py-1 px-2 small rounded-bottom-end">
         Private Content
       </div>
-
-      {/* Overlay Text Section */}
       <div className="position-absolute bottom-0 start-0 w-100 p-3">
         <h5 className="mb-1">
           {profile.name} <span className="text-light">{profile.age}</span>
@@ -557,123 +23,94 @@ const ProfileCard = ({ profile }) => (
           <span className="badge bg-dark">@{profile.username}</span>
           <span className="badge bg-secondary">{profile.tag}</span>
         </div>
+
+         <div>
+            <Link to="/chat">
+              <button className="btn btn-dark btn-sm">Chat</button>
+            </Link>
+          </div>
       </div>
     </div>
   </div>
 );
 
-
 const Explore = () => {
-  const [images, setImages] = useState([]);
+  const [profiles, setProfiles] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const userId = localStorage.getItem("user_id");
-        // if (!userId) {
-        //   setError("User is not logged in. Please login.");
-        //   setLoading(false);
-        //   return;
-        // }
+    const fetchProfiles = async () => {
+        try {
+    const userId = localStorage.getItem("user_id");
+    const response = await axios.get('https://image-generation-production.up.railway.app/image_data', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      params: { user_id: userId },
+    });
 
-        const response = await axios.get('https://image-generation-production.up.railway.app/image_data', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          params: { user_id: userId }
-        });
+        const rawProfiles = response.data;
 
-        const imagesData = response.data;
-        if (Array.isArray(imagesData) && imagesData.length > 0) {
-          const imageUrls = imagesData.map((image) => image.image_url);
-          setImages(imageUrls);
-        } else {
-          setError("No images found for this user.");
-        }
-      // } catch (err) {
-      //   setError('Error fetching images. Please try again later.');
-      //   console.error(err);
+  console.log("Fetched profiles:", rawProfiles); // Debug log
+
+
+        if (!Array.isArray(rawProfiles)) {
+    throw new Error("API response is not an array");
+  }
+
+  const extractAgeFromPrompt = (prompt) => {
+    const match = prompt.match(/(\d+)\s+years\s+old/i);
+    return match ? parseInt(match[1]) : 18;
+  };
+
+       const extractDescriptionFromPrompt = (prompt) => {
+    const lines = prompt.trim().split('\n');
+    const clean = lines.find(line => line.trim() && !line.includes("Your name is"));
+    return clean ? clean.trim().slice(0, 100) + "..." : "No description.";
+  };
+
+  const formattedProfiles = rawProfiles.map((item, index) => {
+    if (!item.image_url) {
+      console.warn("Missing image_url for item", item);
+    }
+
+    return {
+      name: item.image_name || `User ${index + 1}`,
+      age: extractAgeFromPrompt(item.prompt || ""),
+      description: extractDescriptionFromPrompt(item.prompt || ""),
+      username: `${(item.image_name || "user").toLowerCase()}${extractAgeFromPrompt(item.prompt || "")}`,
+      tag: "general",
+      image: item.image_url,
+    };
+  });
+
+
+        setProfiles(formattedProfiles);
+      } catch (err) {
+        setError("Login required");
+        console.error(err);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchImages();
+    fetchProfiles();
   }, []);
 
-  // Split images into chunks of 4 per carousel-item
-  const chunkedImages = [];
-  for (let i = 0; i < images.length; i += 4) {
-    chunkedImages.push(images.slice(i, i + 4));
-  }
-
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  if (error) return <Link to="/login" className="text-white text-decoration-none " > <h3 className="text-center mt-5"> {error}</h3></Link>
 
   return (
     <div className="container">
       <h1 className="my-4">Trending Today</h1>
-      <img
-        src="/public/img/output2.jpg"
-        className="rounded-5 my-3"
-        alt="Cinque Terre"
-        style={{ height: "60px", width: "60px" }}
-      />
+      <h2>Newly Joined <span className="status"></span></h2>
 
-      <h2>
-        Newly Joined <span className="status"></span>
-      </h2>
-
-      {/* Carousel */}
-      <div
-      id="influencerCarousel"
-      className="carousel slide"
-      data-ride="carousel"
-      data-interval="3000"
-    >
-      <div className="carousel-inner">
-        {chunkedImages.map((group, idx) => (
-          <div key={idx} className={`carousel-item ${idx === 0 ? "active" : ""}`}>
-            <div className="row">
-              {group.map((imageUrl, index) => (
-                <div key={index} className="col-12 col-md-6 col-lg-3">
-                  <div className="card h-100">
-                    <img src={imageUrl} className="card-img-top" alt={`Image ${index}`} />
-                    <div className="card-body">
-                      <h5 className="card-title">Card title {index + 1}</h5>
-                      <span className="text-sm bg-light me-3">18</span>
-                      <span className="text-sm bg-light me-3">skinny</span>
-                      <span className="text-sm bg-light">blindly</span>
-                      <p className="card-text">
-                        This is a longer card with supporting text below as a
-                        natural lead-in to additional content.
-                      </p>
-                      <div>
-                        <button className="btn btn-light me-4">Follow</button>
-                        <Link to="/chat">
-                          <button className="btn btn-dark">Chat</button>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-      </div>
-      <div>
-        <h2 className="my-4">All Influencers</h2>
-        {/* Profile Cards Section */}
-        <div className="container-flud py-4 bg-black p-2">
-          <div className="row">
-            {profiles.map((profile, index) => (
-              <ProfileCard key={index} profile={profile} />
-            ))}
-          </div>
+      <div className="container-fluid py-4 bg-black p-2">
+        <div className="row">
+          {profiles.map((profile, index) => (
+            <ProfileCard key={index} profile={profile} />
+          ))}
         </div>
       </div>
     </div>
@@ -681,3 +118,4 @@ const Explore = () => {
 };
 
 export default Explore;
+// export default Explore;

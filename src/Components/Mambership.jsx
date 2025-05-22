@@ -1,5 +1,3 @@
-
- 
   import React, { useEffect, useState } from 'react';
   import { Container, Row, Col, Card, Button } from 'react-bootstrap';
   import axios from 'axios';
@@ -28,14 +26,14 @@
         {/* Section Title */}
         <Row className="justify-content-center mb-5">
           <Col xs={12} className="text-center">
-            <h1>Choose Your Plan</h1>
+            <h2>Choose Your Plan</h2>
             <p className="lead">Find the perfect plan for your AI companionship</p>
           </Col>
         </Row>
   
         {/* Pricing Cards */}
     <Container className="my-5">
-      <h2 className="mb-4 text-white">Available Plans</h2>
+      <h3 className="mb-4 text-white">Available Plans</h3>
 
       {/* {loading && <p className="text-light">Loading...</p>}
       {error && <p className="text-danger">{error}</p>} */}
@@ -44,7 +42,7 @@
         {plans.map((plan, index) => (
           <Col xs={12} md={6} lg={4} className="mb-4" key={plan.id}>
             <Card
-              className="h-100 text-center position-relative"
+              className="h-60 text-center position-relative"
               style={{
                 backgroundColor: "#111",
                 border: "2px solid #e83e8c",

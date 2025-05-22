@@ -18,7 +18,7 @@ export default function AdminDashboard() {
   });
 
   const [character, setCharacter] = useState({
-    name: "Vishau Mahajan",
+    name: "",
     id: "#02c3",
     uniqueUsers: 1,
     uniqueChats: 2,
@@ -39,7 +39,7 @@ export default function AdminDashboard() {
         setStats({
           balance: response.data.plan.plan_price,
           paidOut: response.data.value_used_usd,
-         
+
           paidPictures: 0, // Replace with actual paid pictures if available from API
         });
         setLoading(false); // Stop loading
@@ -64,11 +64,12 @@ export default function AdminDashboard() {
             },
           }
         );
-        
+
         const { received_messages, sent_messages } = response.data;
 
         // Calculate total messages manually by summing received and sent messages
-        const totalMessages = parseInt(received_messages) + parseInt(sent_messages);
+        const totalMessages =
+          parseInt(received_messages) + parseInt(sent_messages);
 
         // Update state with the total messages
         setMessageData({
@@ -92,7 +93,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="container min-vh-100 bg-dark text-white p-4">
-      <div className="mb-6">
+      <div className="mb-2">
         <h5>User: {userData.user_name}</h5>
       </div>
 
@@ -146,7 +147,8 @@ export default function AdminDashboard() {
             </div>
             <div>Paid out</div>
             <p>
-              <strong>Tokens Remaining:</strong> {userData.tokens_remaining}<br/>
+              <strong>Tokens Remaining:</strong> {userData.tokens_remaining}
+              <br />
               <strong>Value Used USd :</strong> {userData.value_used_usd}
             </p>
           </div>
@@ -187,7 +189,10 @@ export default function AdminDashboard() {
       <div className="mb-6 mt-3">
         <h2 className="h4 font-weight-bold mb-4">Characters</h2>
 
-        <div className="bg-dark rounded-2 p-4 mb-4" style={{ border: "1px solid gray" }}>
+        <div
+          className="bg-dark rounded-2 p-4 mb-4"
+          style={{ border: "1px solid gray" }}
+        >
           <div className="d-flex justify-content-between align-items-start mb-6">
             <div className="d-flex align-items-center">
               <div className="relative">
@@ -200,7 +205,7 @@ export default function AdminDashboard() {
                 </div>
               </div>
             </div>
-            <div className="d-flex gap-2">
+            <div className="d-flex">
               <Link to="/chat">
                 <button className="btn btn-dark rounded-pill px-4 py-2 text-sm d-flex align-items-center gap-2">
                   <i className="fa-solid fa-message"></i>
@@ -257,9 +262,7 @@ export default function AdminDashboard() {
               </div>
               <div>
                 <div>Messages</div>
-                <div>
-           {messageData.total_messages}
-            </div>
+                <div>{messageData.total_messages}</div>
               </div>
             </div>
 
@@ -272,7 +275,9 @@ export default function AdminDashboard() {
               </div>
               <div>
                 <div>Pictures unlocked</div>
-                <div className="font-weight-bold">{character.picturesUnlocked}</div>
+                <div className="font-weight-bold">
+                  {character.picturesUnlocked}
+                </div>
               </div>
             </div>
           </div>
@@ -288,11 +293,11 @@ export default function AdminDashboard() {
               <i className="fa-solid fa-plus"></i>
             </div>
             <div>
-              <h3 className="h5 mt-2 font-weight-bold">Extra character slot</h3>
+              <h5 className="h5 mt-2 font-weight-bold">Extra character slot</h5>
               <p>Add an extra slot to your account</p>
             </div>
           </div>
-          <button className="ml-auto btn btn-light text-dark rounded-pill px-4 py-2 text-sm font-weight-medium">
+          <button className="ml-auto btn btn-light text-dark rounded-pill px-4 py-2 text-xs font-weight-medium">
             Buy with 15% discount
           </button>
         </div>

@@ -9,24 +9,32 @@ function Sidebar({ isOpen, toggleSidebar }) {
       toggleSidebar();
     }
   };
- const isLoggedIn = localStorage.getItem("token") ? true : false;
+  const isLoggedIn = localStorage.getItem("token") ? true : false;
   return (
     <div className={`sidebar ${isOpen ? "open" : ""}`}>
       <ul className="menu">
         {isLoggedIn ? (
-          <li className="menu-item">
-            <Link to="/dashboard" className="menu-link text-white" onClick={handleSidebarClose}>
+          <Link
+            to="/dashboard"
+            className="menu-link text-white"
+            onClick={handleSidebarClose}
+          >
+            <li className="menu-item">
               <i className="fa-solid fa-folder-open me-2"></i>
               <span className="menu-text ms-3">Dashboard</span>
-            </Link>
-          </li>
+            </li>
+          </Link>
         ) : (
-          <li className="menu-item">
-            <Link to="/earlyaccess" className="menu-link text-white" onClick={handleSidebarClose}>
+          <Link
+            to="/"
+            className="menu-link text-white"
+            onClick={handleSidebarClose}
+          >
+            <li className="menu-item">
               <i className="fa-regular fa-star me-2"></i>
               <span className="menu-text ms-3">Home</span>
-            </Link>
-          </li>
+            </li>
+          </Link>
         )}
         {/* <li className="menu-item">
           <a href="#How" className="menu-link text-white" onClick={handleSidebarClose}>
@@ -34,38 +42,61 @@ function Sidebar({ isOpen, toggleSidebar }) {
             <span className="menu-text ms-3">Features</span>
           </a>
         </li> */}
-        <li className="menu-item">
-          <Link to="/explore" className="menu-link text-white" onClick={handleSidebarClose}>
+
+        <Link
+          to="/explore"
+          className="menu-link text-white"
+          onClick={handleSidebarClose}
+        >
+          <li className="menu-item">
             <i className="fa-regular fa-image me-2"></i>
             <span className="menu-text ms-3">Explore</span>
-          </Link>
-        </li>
-     
-        <li className="menu-item">
-          <Link to="/Createimg" className="menu-link text-white" onClick={handleSidebarClose}>
+          </li>
+        </Link>
+
+        <Link
+          to="/Createimg"
+          className="menu-link text-white"
+          onClick={handleSidebarClose}
+        >
+          <li className="menu-item">
             <i className="fa-duotone fa-regular fa-plus me-2"></i>
             <span className="menu-text ms-3">Create Image</span>
-          </Link>
-        </li>
-        <li className="menu-item">
-          <Link to="/Gallery" className="menu-link text-white" onClick={handleSidebarClose}>
+          </li>
+        </Link>
+
+        <Link
+          to="/Gallery"
+          className="menu-link text-white"
+          onClick={handleSidebarClose}
+        >
+          <li className="menu-item">
             <i className="fa-regular fa-image me-2"></i>
             <span className="menu-text ms-3">Gallery</span>
-          </Link>
-        </li>
-        <li className="menu-item">
-          <Link to="/Contact" className="menu-link text-white" onClick={handleSidebarClose}>
+          </li>
+        </Link>
+
+        <Link
+          to="/Contact"
+          className="menu-link text-white"
+          onClick={handleSidebarClose}
+        >
+          <li className="menu-item">
             <i className="fa-regular fa-user me-2"></i>
             <span className="menu-text ms-3">Contact</span>
-          </Link>
-        </li>
-        <li className="menu-item">
-          <Link to="/Membership" className="menu-link text-white" onClick={handleSidebarClose}>
+          </li>
+        </Link>
+
+        <Link
+          to="/Membership"
+          className="menu-link text-white"
+          onClick={handleSidebarClose}
+        >
+          <li className="menu-item">
             <i className="fa-solid fa-bolt me-2"></i>
             <span className="menu-text ms-3">Membership</span>
-          </Link>
-        </li>
-         
+          </li>
+        </Link>
       </ul>
     </div>
   );
